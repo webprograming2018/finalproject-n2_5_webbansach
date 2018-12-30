@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="center_column" class="center_column col-xs-12" style="width:77%;">
     <div class="breadcrumb clearfix"><a class="home" href="index-2.html" title="Return to Home"><i
-            class="icon-home"></i></a> <span class="navigation-pipe">&gt;</span> <span class="navigation_page">Trang chủ</span>
+            class="icon-home"></i></a> <span class="navigation-pipe">&gt;</span> <span class="navigation_page"><span class="lang" key="home"></span></span>
     </div>
     <div class="content_scene_cat">
         <div class="align_center owl-carousel owl-theme">
@@ -20,7 +20,7 @@
         </div>
     </div>
     <h1 class="page-heading product-listing">
-        <span class="cat-name">NỔI BẬT&nbsp;</span>
+        <span class="cat-name"><span class="lang" key="highlight"></span>&nbsp;</span>
         <span class="heading-counter">There are <span id="product-count"></span> products.</span>
     </h1>
 
@@ -35,7 +35,7 @@
                   action=""
                   class="productsSortForm">
                 <div class="select selector1">
-                    <label for="selectProductSort">Sắp xếp theo</label>
+                    <label for="selectProductSort"><span class="lang" key="sort"></span></label>
                     <select id="selectProductSort" class="selectProductSort form-control">
                         <option value="all:asc" selected="selected">--</option>
                         <option value="price_sort:asc">Giá từ thấp tới cao</option>
@@ -48,7 +48,7 @@
             <form action=""
                   method="get" class="nbrItemPage">
                 <div class="clearfix selector1">
-                    <label for="selectPageSize"> Show </label>
+                    <label for="selectPageSize"> <span class="lang" key="show"></span> </label>
                     <select name="pageSize" id="selectPageSize" class="form-control">
                         <option value="6" selected="selected">6</option>
                         <option value="12">12</option>

@@ -14,7 +14,7 @@
                         </div>
                         <div class="form-group">
                             <label class="">Mật khẩu</label>
-                            <input type="password" class="form-control login" name="password" required placeholder="Nhập mật khẩu" autocomplete="off">
+                            <input type="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" class="form-control login" name="password" required placeholder="Nhập mật khẩu" autocomplete="off">
                         </div>
                         <a class="toggle-form" href="">Đăng ký</a>
                         <p style="color: red;font-style: italic;" class="login-error"></p>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label class="">Mật khẩu</label>
-                            <input type="password" class="form-control login" name="password" required placeholder="Nhập mật khẩu" autocomplete="off">
+                            <input type="password" class="form-control login" pattern="(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" name="password" required placeholder="Nhập mật khẩu" autocomplete="off">
                         </div>
                         <a class="toggle-form" href="">Đã có tài khoản</a>
                         <p style="color: red;font-style: italic;" class="login-error"></p>

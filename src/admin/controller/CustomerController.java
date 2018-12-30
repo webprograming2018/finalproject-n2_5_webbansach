@@ -32,7 +32,8 @@ public class CustomerController extends HttpServlet {
                     resp.sendRedirect("/home");
                 }else{
                     String next_page = req.getParameter("next_page");
-                    req.setAttribute("next_page","/product?code="+next_page);
+                    if (next_page!=null&&!next_page.equalsIgnoreCase(""))
+                        req.setAttribute("next_page","/product?code="+next_page);
                     req.getRequestDispatcher("/client/pages/login.jsp").forward(req, resp);
                 }
 

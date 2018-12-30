@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet {
 		String action = request.getParameter("action");
 		if(action.equalsIgnoreCase("logout")){
 			session.removeAttribute("currentUser");
-			response.sendRedirect("/admin/home");
+			response.sendRedirect("/admin/login?action=login");
 			return;
 		}else {
 			if(session.getAttribute("currentUser")!=null)

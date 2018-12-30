@@ -63,14 +63,14 @@
                         </div>
 
                         <div id="languages-block-top" class="languages-block">
-                            <select name="" id="">
-                                <option value="">English</option>
-                                <option value="">Vietnam</option>
+                            <select name="language" >
+                                <option value="vn">Việt Nam</option>
+                                <option value="en">English</option>
                             </select>
                         </div>
                         <div class="customer-login">
                             <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <a href="/product?action=wish-list">Yêu thích <span id="count-wish-list"></span></a>
+                            <a href="/product?action=wish-list"><span class="lang" key="wish-list"></span> <span id="count-wish-list"></span></a>
                         </div>
                         <%
                             Customer cus = (Customer) session.getAttribute("currentCustomer");
@@ -78,7 +78,7 @@
                         %>
                         <div class="customer-login">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
-                            <a href="/customer?action=login">Đăng nhập</a>
+                            <a href="/customer?action=login"><span class="lang" key="login"></span></a>
                         </div>
                         <%
                             }else {
@@ -87,8 +87,8 @@
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <a href="" class="dropdown-toggle"><%=cus.getName()%></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/customer?action=edit-info">Thông tin cá nhân</a></li>
-                                <li><a href="/customer?action=logout">Đăng xuất</a></li>
+                                <li><a href="/customer?action=edit-info"><span class="lang" key="info"></span></a></li>
+                                <li><a href="/customer?action=logout"><span class="lang" key="logout"></span></a></li>
                             </ul>
 
                         </div>
@@ -98,7 +98,7 @@
                         <div class="col-sm-3 clearfix block_cart_header">
                             <div class="shopping_cart">
                                 <a href="" title="View my shopping cart" rel="nofollow">
-                                   Giỏ hàng ( <span class="cart_length">0</span> )
+                                    <span class="lang" key="cart"></span> ( <span class="cart_length">0</span> )
                                 </a>
                                 <div class="cart_block block exclusive">
                                     <div class="block_content">

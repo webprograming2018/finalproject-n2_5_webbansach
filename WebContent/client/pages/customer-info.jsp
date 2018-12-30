@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="admin.model.Bill" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%-- header --%>
 <%@include file="layout/header-footer/header.jsp"%>
@@ -85,7 +87,7 @@
                                             <div class="form-group">
                                                 <label class="control-label" for="new_password">Mật khẩu mới</label>
                                                 <div class="input-wrap">
-                                                    <input type="password" disabled required minlength="6" name="new_password" class="form-control" id="new_password" value="" autocomplete="off" placeholder="Mật khẩu từ 6 ký tự">
+                                                    <input type="password" disabled required minlength="8" pattern="(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" name="new_password" class="form-control" id="new_password" value="" autocomplete="off" placeholder="Mật khẩu từ 8 ký tự">
                                                     <span class="help-block"></span>
                                                 </div>
                                             </div>
@@ -102,11 +104,15 @@
                                         List<Bill> bills = (List<Bill>) request.getAttribute("bills");
                                 %>
                                 <%----%>
-                                    <ul>
+                                    <ul class="list-group">
                                         <%
                                             for (Bill b: bills){
                                         %>
-                                        <li><%=b.getCode()%></li>
+                                        <li class="list-group-item">
+                                            <a href="/order?action=complete&code=<%=b.getCode()%>">Mã hóa đơn: <%=b.getCode()%></a>
+                                            <a href="/order?action=complete&code=<%=b.getCode()%>">Ngày tạo: <%=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(b.getCreateAt())%></a>
+
+                                        </li>
                                         <%}%>
                                     </ul>
                                 <%

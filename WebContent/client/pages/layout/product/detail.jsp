@@ -1,4 +1,3 @@
-<%@page import="admin.model.Customer"%>
 <%@ page import="admin.model.Product" %>
 <%@ page import="admin.dto.ProductDetail" %>
 <%@ page import="java.util.List" %>
@@ -215,7 +214,7 @@
         <%}%>
     </section>
     <%
-        Customer cus2 =  (Customer)session.getAttribute("currentCustomer");
+        Customer cus2 = (Customer) session.getAttribute("currentCustomer");
         if(cus2!=null){
     %>
     <p>

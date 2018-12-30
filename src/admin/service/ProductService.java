@@ -7,10 +7,7 @@ import admin.model.Product;
 import util.ConnectionUtil;
 import util.ConvertUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +17,8 @@ public class ProductService {
     public ProductService() {
 
     }
-    public ArrayList<Product> getProductNew(){
-        return productDAO.getProductNew();
+    public ArrayList<Product> getProductNew(Date date){
+        return productDAO.getProductNew(date);
     }
     public Boolean update(Product product){
         if(product.getCode()==null){

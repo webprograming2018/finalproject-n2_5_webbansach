@@ -72,7 +72,7 @@ public class ProductController extends HttpServlet {
                 Product product = new Product();
                 product.setCode(req.getParameter("product[code]"));
                 product.setName(req.getParameter("product[name]"));
-                product.setSale(Integer.parseInt(req.getParameter("product[sale]").trim()));
+                product.setSale(Integer.parseInt(req.getParameter("product[sale]")));
                 product.setTypeId(Integer.parseInt(req.getParameter("product[typeId]")));
                 product.setNxbId(Integer.parseInt(req.getParameter("product[nxbId]")));
                 product.setAuthorId(Integer.parseInt(req.getParameter("product[authorId]")));

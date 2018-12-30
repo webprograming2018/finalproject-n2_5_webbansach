@@ -42,7 +42,7 @@ $(document).ready(function () {
             typeId : 0,
             authorId : 0,
             nxbId : 0,
-            sale : 0,
+            sale : 0
         }
     };
     $(document).on('click', '.form-search button', function () {

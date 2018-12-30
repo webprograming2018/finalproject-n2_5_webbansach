@@ -1,3 +1,4 @@
+
 var all = {
     authors : function () {
         var data;
@@ -102,3 +103,18 @@ $('a.dropdown-toggle').click(function (e) {
     e.preventDefault();
    $(this).parent().find('ul.dropdown-menu').toggle();
 });
+/*------------------------------------------------------- multil language ------------------------------*/
+if(!localStorage.language){
+    localStorage.setItem("language","vn");
+}
+
+setLang();
+function setLang(){
+    var lang = localStorage.language;
+    $('select[name="language"]').val(lang);
+    $.getJSON("client/i18n/"+lang+".json", function(res) {
+        $('.lang').each(function(index, element){
+            $(this).text(res[$(this).attr('key')])
+        })
+    });
+}

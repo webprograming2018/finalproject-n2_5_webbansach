@@ -13,6 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @WebServlet("/product")
@@ -56,15 +59,24 @@ public class ProductController extends HttpServlet {
             Cookie cookie = getCookie(req.getCookies());
 
             if (cookie != null) {
-                List<Product> list = productService.getProductNew();
+
+                String value = cookie.getValue();
+                String split[] = value.split("&");
+                String dateJoin = split[0].split("_")[1];
+                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = null;
+                try {
+                    date = (Date)formatter.parse(dateJoin);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Integer seen = Integer.parseInt(split[1].split("_")[1]);
+                List<Product> list = productService.getProductNew(new java.sql.Date(date.getTime()));
                 if (list.size() == 0){
                     resp.getWriter().write(gson.toJson(null));
                     return;
                 }
-                String value = cookie.getValue();
-                String split[] = value.split("&");
-                //Integer size = Integer.parseInt(split[1].split("_")[1]);
-                Integer seen = Integer.parseInt(split[1].split("_")[1]);
+
                 if(seen == 2){
                     resp.getWriter().write(gson.toJson(list));
                 }else
@@ -73,19 +85,49 @@ public class ProductController extends HttpServlet {
 
         }
         if (action.equalsIgnoreCase("get-notification")){
-            List<String> codes = new ArrayList<String>(Arrays.asList(req.getParameter("arr_code").split(",")));
-            List<Product> list = productService.getProductNew();
-            if(list.size() < codes.size()){
-                resp.getWriter().write(gson.toJson(null));
-                return;
-            }
-            for (Product p: list) {
-                if(codes.indexOf(p.getCode()) == -1){
-                    resp.getWriter().write(gson.toJson(true));
+            Cookie cookie = getCookie(req.getCookies());
+
+            if (cookie != null) {
+
+                String value = cookie.getValue();
+                String split[] = value.split("&");
+                Integer seen = Integer.parseInt(split[1].split("_")[1]);
+                if (seen == 1){
+                    resp.getWriter().write(gson.toJson(false));
                     return;
                 }
-            }
-            resp.getWriter().write(gson.toJson(false));
+                String dateJoin = split[0].split("_")[1];
+                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = null;
+                try {
+                    date = (Date) formatter.parse(dateJoin);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                List<Product> list = productService.getProductNew(new java.sql.Date(date.getTime()));
+                String arr = req.getParameter("arr_code");
+                if (arr != null && !arr.equalsIgnoreCase("")) {
+                    List<String> codes = new ArrayList<String>(Arrays.asList(arr.split(",")));
+
+                    if (list.size() < codes.size()) {
+                        resp.getWriter().write(gson.toJson(null));
+                        return;
+                    }
+                    if (codes.size() > 0) {
+                        for (Product p : list) {
+                            if (codes.indexOf(p.getCode()) == -1) {
+                                resp.getWriter().write(gson.toJson(true));
+                                return;
+                            }
+                        }
+                    }
+                }else {
+                    if(list.size()>0)
+                        resp.getWriter().write(gson.toJson(true));
+                }
+
+            }else
+                resp.getWriter().write(gson.toJson(false));
         }
         if(action.equalsIgnoreCase("add-comment")){
             String comment = req.getParameter("comment");

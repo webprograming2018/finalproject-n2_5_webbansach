@@ -8,10 +8,7 @@ import admin.model.Product;
 import admin.model.Type;
 import util.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -258,14 +255,15 @@ public class ProductDAO {
         }
         return false;
     }
-    public ArrayList<Product> getProductNew() {
+    public ArrayList<Product> getProductNew(Date date) {
         ArrayList<Product> list = new ArrayList<Product>();
         try {
             Connection connection = ConnectionUtil.open();
-            String sql = "SELECT p.id, p.code, p.name, p.image, p.author_id, p.price, p.sale FROM products p WHERE TIMESTAMPDIFF(DAY, p.create_at, NOW()) BETWEEN 0 AND 3 ORDER BY id desc";
+            String sql = "SELECT p.id, p.code, p.name, p.image, p.author_id, p.price, p.sale FROM products p WHERE TIMESTAMPDIFF(DAY, ?, p.create_at) >= 0 and TIMESTAMPDIFF(DAY, p.create_at, NOW()) BETWEEN 0 AND 3 ORDER BY id desc";
 
             sql += " LIMIT 0,10";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setDate(1, date);
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 Product p = new Product();

@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet("/home")
 public class HomeController extends HttpServlet {
@@ -42,7 +44,7 @@ public class HomeController extends HttpServlet {
 
         }
         if(newP == false){
-            String value = "uid_"+ConvertUtil.randomDateNow() +"&seen_1";
+            String value = "uid_"+new SimpleDateFormat("yyyy-MM-dd").format(new Date()) +"&seen_1";
             Cookie CustomUser = new Cookie("CustomUser", value);
             CustomUser.setMaxAge(60 * 60 * 24);
             resp.addCookie(CustomUser);
@@ -56,7 +58,6 @@ public class HomeController extends HttpServlet {
                 cookie = c;
                 break;
             }
-
         }
         return cookie;
     }
